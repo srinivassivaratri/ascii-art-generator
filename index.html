@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCII Art Generator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            color: white;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        #image-input {
+            background-color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        #ascii-output {
+            font-family: monospace;
+            white-space: pre;
+            font-size: 5px;
+            line-height: 5px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: auto;
+            max-width: 90vw;
+            max-height: 70vh;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .control {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input[type="range"],
+        input[type="text"] {
+            width: 100%;
+        }
+
+        #ascii-output.color {
+            background-color: black;
+        }
+    </style>
+    <script src="https://unpkg.com/gif-frames@1.0.1/dist/gif-frames.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+
+<body>
+    <h1>ASCII Art Generator</h1>
+    <input type="file" id="image-input" accept="image/*">
+    <div class="controls">
+        <div class="control">
+            <label for="scale">Scale:</label>
+            <input type="range" id="scale" min="0.1" max="0.5" step="0.1" value="0.2">
+        </div>
+        <div class="control">
+            <label for="chars">ASCII Chars:</label>
+            <input type="text" id="chars" value="@#S%?*+;:,.">
+        </div>
+        <div class="control">
+            <label for="color-mode">Color Mode:</label>
+            <input type="checkbox" id="color-mode">
+        </div>
+        <div class="control">
+            <label for="invert">Invert:</label>
+            <input type="checkbox" id="invert">
+        </div>
+        <div class="control">
+            <label for="brightness">Brightness:</label>
+            <input type="range" id="brightness" min="-100" max="100" value="0">
+        </div>
+        <div class="control">
+            <label for="contrast">Contrast:</label>
+            <input type="range" id="contrast" min="-100" max="100" value="0">
+        </div>
+    </div>
+    <div id="ascii-output"></div>
+    <button id="export-btn">Export as Image</button>
+    <script src="script.js"></script>
+</body>
+
+</html>
